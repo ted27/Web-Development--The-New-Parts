@@ -11,39 +11,14 @@
     %script{:src => 'resources/slidy.js', :charset => 'utf-8', :type => 'text/javascript'}
     :coffeescript
       $(document).ready -> prettyPrint()
-    :css
-      div.slide#pseudoclasses table {
-        margin:auto;
-      }
-      div.slide#pseudoclasses td {
-        padding:5px;
-      }
-      div.slide#pseudoclasses tr:nth-child(odd) {
-        color:#FFF;
-      }
-      div.slide#pseudoclasses tr:nth-child(even) {
-        color:rgba(255,255,255,0.5);
-      }
-      div.roundy {
-        border-radius: 20px;
-        width:300px;
-        height:100px;
-        margin:auto;
-        background-color:rgba(0,0,0,0.5);
-      }
-      div.centervertically {
-        display:table-cell;
-        vertical-align:middle;
-        height:100px;
-        width:300px;
-        text-align:center;
-      }
-      div.shadow {
-        box-shadow:0px 0px 50px rgba(255,255,255,0.6);
-      }
-      div.gradient {
-        background-image:-moz-linear-gradient(bottom , #000000 0%, rgba(255, 255, 255, 0.5) 50%,rgba(0,0,0,1) 100%);
-        background-image:-webkit-linear-gradient(center bottom , #000000 0%, rgba(255, 255, 255, 0.5) 50%,rgba(0,0,0,1) 100%);
+    :javascript
+      function runWorker() {
+          var worker = new Worker('resources/mersenne_prime.js');
+          worker.onmessage = function(e) {
+              alert(e.data ? "Found a Mersenne Prime!" : "Womp womp.");
+          };
+          worker.postMessage(2202);
+          worker.postMessage(2203);
       }
 
   %body
@@ -70,20 +45,20 @@
       %h1 HAML/SLIM/ERB
     .slide
       %h1 CSS: The Old Stuff
-      %ul{:style=>"width:300px;text-align:left;margin:auto;"}
+      %ul.afewpoints
         %li a:hover
         %li a:first-line
         %li a.class &gt; span
     .slide
       %h1 CSS3 Selectors
-      %ul{:style=>"width:300px;text-align:left;margin:auto;"}
+      %ul.afewpoints
         %li a[href="http://google.com"]
         %li img[class~="filler"] <!-- One in a space-separated list --> 
         %li img[src$=".png"]
         %li img[src*="images/"]
     .slide#pseudoclasses
       %h1 CSS3 Pseudo-Classes
-      %ul{:style=>"width:300px;text-align:left;margin:auto;"}
+      %ul.afewpoints
         %li tr:nth-child(odd)
         %li tr:nth-child(even)
       %table{:style=>"border:4px solid #FFF"}
@@ -115,6 +90,13 @@
         box-shadow: 0px 0px 40px rgba(255,255,255,0.6);
     .slide
       %h1 CSS3 Properties
+      %div.roundy.shadow_inset
+        %div.centervertically
+          Inset Shadows!
+      .note
+        box-shadow: 0px 0px 40px rgba(255,255,255,0.6);
+    .slide
+      %h1 CSS3 Properties
       %div.roundy.shadow.gradient
         %div.centervertically
           Gradients!
@@ -122,6 +104,33 @@
         box-shadow: 0px 0px 40px rgba(255,255,255,0.6);
 
     .slide
+      %h1 Javascript History API
+      %ul.afewthings
+        %li
+          %a{:href=>"mersenne_presentation.html",:onclick=>"javascript:history.pushState({}, 'Another Page!', 'mersenne_presentation.html#('+(w3c_slidy.slide_number+1)+')');return false;"}
+            Go to mersenne_presentation.html
+      .note
+        history.pushState({},'Title', 'mersenne_presentation.html')
+    .slide
+      %h1 Javascript Geolocation
+      %div.roundy
+        %div.centervertically
+          %a{:onclick=>"javascript:navigator.geolocation.getCurrentPosition(function(s){alert(s.coords.latitude + ', ' + s.coords.longitude)})"} Find Me!
+    .slide
+      %h1 Web Workers
+      %pre.prettyprint
+        %code
+          :plain
+            var worker = new Worker('resources/mersenne_prime.js');
+            worker.onmessage = function(e) {
+                alert(e.data ? "Found a Mersenne Prime!" : "Womp womp.");
+            };
+            worker.postMessage(2202);
+            worker.postMessage(2203);
+      %div.roundy
+        %div.centervertically
+          %a{:onclick=>"javascript:runWorker();"} Run Worker!
+    .slide 
       %h1 JAVASCRIPT
       %pre.prettyprint
         %code

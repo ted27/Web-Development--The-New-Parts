@@ -22,8 +22,52 @@ div.toolbar {
 
 div.slide {
 	@include background(linear-gradient(top left, rgba(55,129,184,0.75), rgba(255,0,0,0.05)));
-}
 
+    a {
+        color:white;
+    } 
+    &#pseudoclasses table {
+        margin:auto;
+    }
+    &#pseudoclasses td {
+        padding:5px;
+    }
+    &#pseudoclasses tr:nth-child(odd) {
+        color:#FFF;
+    }
+    &#pseudoclasses tr:nth-child(even) {
+        color:rgba(255,255,255,0.5);
+    }
+
+    div.roundy {
+      border-radius: 20px;
+      width:300px;
+      height:100px;
+      margin:auto;
+      background-color:rgba(0,0,0,0.5);
+    }
+    ul.afewpoints {
+      width:300px;
+      text-align:left;
+      margin:auto;
+    }
+    div.centervertically {
+      display:table-cell;
+      vertical-align:middle;
+      height:100px;
+      width:300px;
+      text-align:center;
+    }
+    div.shadow {
+      box-shadow:0px 0px 50px rgba(255,255,255,0.6);
+    }
+    div.shadow_inset {
+      box-shadow:0px 0px 50px rgba(255,255,255,0.6) inset;
+    }
+    div.gradient {
+      @include background(linear-gradient(bottom, color-stops(black,rgba(255,255,255,0.5),black)));
+    }
+}
 span.topline {
 	border-top: 1px solid #ddd;
 	padding-top: 8px;
