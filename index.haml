@@ -63,17 +63,17 @@
         %li tr:nth-child(even)
       %table{:style=>"border:4px solid #FFF"}
         %tr
-          %td (1,1)
-          %td (2,1)
+          %td 2
+          %td 3
         %tr
-          %td (1,2)
-          %td (2,2)
+          %td 5
+          %td 7
         %tr
-          %td (1,3)
-          %td (2,3)
+          %td 13
+          %td 17
         %tr
-          %td (1,4)
-          %td (2,4)
+          %td 19
+          %td 31
     .slide
       %h1 CSS3 Properties
       %div.roundy
@@ -94,7 +94,7 @@
         %div.centervertically
           Inset Shadows!
       .note
-        box-shadow: 0px 0px 40px rgba(255,255,255,0.6);
+        box-shadow: 0px 0px 40px rgba(255,255,255,0.6) inset;
     .slide
       %h1 CSS3 Properties
       %div.roundy.shadow.gradient
@@ -105,31 +105,36 @@
 
     .slide
       %h1 Javascript History API
-      %ul.afewthings
-        %li
-          %a{:href=>"mersenne_presentation.html",:onclick=>"javascript:history.pushState({}, 'Another Page!', 'mersenne_presentation.html#('+(w3c_slidy.slide_number+1)+')');return false;"}
-            Go to mersenne_presentation.html
+      %a{:href=>"mersenne.html",:onclick=>"javascript:history.pushState({}, 'Another Page!', 'mersenne.html#('+(w3c_slidy.slide_number+1)+')');return false;"}
+        %div.roundy
+          %div.centervertically
+            Go to mersenne.html
       .note
-        history.pushState({},'Title', 'mersenne_presentation.html')
+        history.pushState({},'Title', 'mersenne.html')
     .slide
       %h1 Javascript Geolocation
-      %div.roundy
-        %div.centervertically
-          %a{:onclick=>"javascript:navigator.geolocation.getCurrentPosition(function(s){alert(s.coords.latitude + ', ' + s.coords.longitude)})"} Find Me!
+      %a{:onclick=>"javascript:navigator.geolocation.getCurrentPosition(function(s){alert(s.coords.latitude + ', ' + s.coords.longitude)})"}
+        %div.roundy
+          %div.centervertically
+            Find Me!
+      .note
+        navigator.geolocation.
+        getCurrentPosition(callback)
     .slide
       %h1 Web Workers
       %pre.prettyprint
         %code
-          :plain
+          :preserve
             var worker = new Worker('resources/mersenne_prime.js');
             worker.onmessage = function(e) {
                 alert(e.data ? "Found a Mersenne Prime!" : "Womp womp.");
             };
             worker.postMessage(2202);
             worker.postMessage(2203);
-      %div.roundy
-        %div.centervertically
-          %a{:onclick=>"javascript:runWorker();"} Run Worker!
+      %a{:onclick=>"javascript:runWorker();"}
+        %div.roundy
+          %div.centervertically
+            Run Worker!
     .slide 
       %h1 JAVASCRIPT
       %pre.prettyprint

@@ -1,10 +1,10 @@
 @import "compass";
 
-@mixin shadebox {
+@mixin shadebox($shadebox-radius:5px) {
 	border: 1px solid rgba(10,10,10, 0.5);
 	background: rgba(10,10,10,0.4);
 	box-shadow: inset 0 0 8px rgb(10,10,10);
-	border-radius: 5px;
+	border-radius: $shadebox-radius;
 }
 
 strong {
@@ -25,7 +25,17 @@ div.slide {
 
     a {
         color:white;
+        cursor:pointer;
+
+        &:hover { 
+            text-decoration:none;
+
+            div {
+                @include shadebox(20px);
+            }
+        }
     } 
+
     &#pseudoclasses table {
         margin:auto;
     }
